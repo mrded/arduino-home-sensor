@@ -7,11 +7,6 @@
 #include <DHT.h>
 
 //
-// Includes
-//
-#include "application.h"
-
-//
 // Configuration
 //
 
