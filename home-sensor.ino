@@ -27,10 +27,8 @@ void setup() {
 }
 
 void loop() {
-  delay(5000); // Seconds.
-
   display.clearDisplay();
-  display.setTextSize(1);
+  
   display.setTextColor(WHITE);
   display.setCursor(0,0);
 
@@ -40,21 +38,27 @@ void loop() {
 
   // Check if any reads failed and exit early (to try again).
   if (isnan(humidity) || isnan(temperature) || isnan(heatIndex)) {
+    display.setTextSize(1);
     display.println("Failed to read from DHT sensor!");
     display.display();
     return;
   }
+  
+  display.setTextSize(4);
 
-  display.println(Time.timeStr());
+  display.print((int) temperature);
+  display.print((char)248);
+  display.println("C");
 
-  display.print("temperature: ");
-  display.println(temperature);
-
-  display.print("humidity: ");
+  display.setTextSize(1);
+  
+  display.print("humidity:");
   display.println(humidity);
 
-  display.print("heatIndex: ");
+  display.print("heat index:");
   display.println(heatIndex);
-
+  
   display.display();
+  
+  delay(5000);
 }
