@@ -1,0 +1,3 @@
+[submodule "libs/CO2Sensor"]
+	path = libs/CO2Sensor
+	url = https://github.com/solvek/CO2Sensor.git
