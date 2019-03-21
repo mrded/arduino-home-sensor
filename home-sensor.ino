@@ -1,25 +1,24 @@
-//@see: https://build.particle.io/libs/Adafruit_DHT/0.0.2
-#include <Adafruit_DHT.h>
+#include <Adafruit_Sensor.h>
+#include <DHT.h>
+#include <DHT_U.h>
 
-//@see: https://build.particle.io/libs/Adafruit_SSD1306/0.0.2
-#include <Adafruit_SSD1306.h>
+#include "Adafruit_SSD1306.h"
 
-// Display
-#define OLED_RESET D4
-Adafruit_SSD1306 display(OLED_RESET);
+// OLED display TWI address
+Adafruit_SSD1306 display(-1);
 
 // DHT temperature sensor
-#define DHTPIN D3      // what pin we're connected to
+#define DHTPIN 7      // what pin we're connected to
 #define DHTTYPE DHT22  // sensor type: [DHT11, DHT22, DHT21, AM2301]
-DHT dht(DHTPIN, DHTTYPE);
+DHT_Unified dht(DHTPIN, DHTTYPE);
 
 void setup() {
-  display.begin(SSD1306_SWITCHCAPVCC, 0x3C);  // initialize with the I2C addr 0x3D (for the 128x64)
+  display.begin(SSD1306_SWITCHCAPVCC, 0x3C);
   display.clearDisplay();
   display.setTextSize(1);
   display.setTextColor(WHITE);
-  display.setCursor(0,0);
-
+  display.setCursor(27,30);
+  
   display.println("Hello, world!");
   display.display();
 
@@ -27,38 +26,37 @@ void setup() {
 }
 
 void loop() {
+  delay(5000);
+  
   display.clearDisplay();
   
   display.setTextColor(WHITE);
   display.setCursor(0,0);
 
-  float humidity = dht.getHumidity();
-  float temperature = dht.getTempCelcius();
-  float heatIndex = dht.getHeatIndex();
+  sensors_event_t event;
 
-  // Check if any reads failed and exit early (to try again).
-  if (isnan(humidity) || isnan(temperature) || isnan(heatIndex)) {
+  dht.temperature().getEvent(&event);
+  if (isnan(event.temperature)) {
+    display.setTextSize(4);
+    display.println("Error reading temperature!");
+  }
+  else {
+    display.setTextSize(4);
+    display.print((int) event.temperature);
+    display.print((char)248);
+    display.println("C");
+  }
+
+  dht.humidity().getEvent(&event);
+  if (isnan(event.relative_humidity)) {
+    display.println("Error reading humidity!");
+  }
+  else {
     display.setTextSize(1);
-    display.println("Failed to read from DHT sensor!");
-    display.display();
-    return;
+    display.print("humidity:");
+    display.print(event.relative_humidity);
+    display.println("%");
   }
   
-  display.setTextSize(4);
-
-  display.print((int) temperature);
-  display.print((char)248);
-  display.println("C");
-
-  display.setTextSize(1);
-  
-  display.print("humidity:");
-  display.println(humidity);
-
-  display.print("heat index:");
-  display.println(heatIndex);
-  
   display.display();
-  
-  delay(5000);
 }
