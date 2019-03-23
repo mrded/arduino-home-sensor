@@ -2,7 +2,7 @@
 #include <DHT.h>
 #include <DHT_U.h>
 
-#include "Adafruit_SSD1306.h"
+#include "src/Adafruit_SSD1306/Adafruit_SSD1306.h"
 
 // OLED display TWI address
 Adafruit_SSD1306 display(-1);
