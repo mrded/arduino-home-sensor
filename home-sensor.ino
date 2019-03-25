@@ -2,10 +2,9 @@
 #include <DHT.h>
 #include <DHT_U.h>
 
-#include "src/Adafruit_SSD1306/Adafruit_SSD1306.h"
-
-// OLED display TWI address
-Adafruit_SSD1306 display(-1);
+#include <Wire.h> 
+#include <LiquidCrystal_I2C.h>
+LiquidCrystal_I2C lcd(0x27,20,4);
 
 // DHT temperature sensor
 #define DHTPIN 7      // what pin we're connected to
@@ -13,50 +12,45 @@ Adafruit_SSD1306 display(-1);
 DHT_Unified dht(DHTPIN, DHTTYPE);
 
 void setup() {
-  display.begin(SSD1306_SWITCHCAPVCC, 0x3C);
-  display.clearDisplay();
-  display.setTextSize(1);
-  display.setTextColor(WHITE);
-  display.setCursor(27,30);
+  lcd.init();
+  lcd.backlight();
+  lcd.setCursor(0,0);
   
-  display.println("Hello, world!");
-  display.display();
+  lcd.print("Hello, world!");
 
   dht.begin();
 }
 
 void loop() {
   delay(5000);
-  
-  display.clearDisplay();
-  
-  display.setTextColor(WHITE);
-  display.setCursor(0,0);
+
+  lcd.clear();
+
+  lcd.setCursor(0,0);
 
   sensors_event_t event;
 
   dht.temperature().getEvent(&event);
   if (isnan(event.temperature)) {
-    display.setTextSize(4);
-    display.println("Error reading temperature!");
+    lcd.setCursor(0,0);
+    lcd.print("Error reading temperature!");
   }
   else {
-    display.setTextSize(4);
-    display.print((int) event.temperature);
-    display.print((char)248);
-    display.println("C");
+    lcd.setCursor(0,0);
+    lcd.print("temperature:");
+    lcd.setCursor(13,0);
+    lcd.print((int) event.temperature);
   }
 
   dht.humidity().getEvent(&event);
   if (isnan(event.relative_humidity)) {
-    display.println("Error reading humidity!");
+    lcd.setCursor(0,1);
+    lcd.print("Error reading humidity!");
   }
   else {
-    display.setTextSize(1);
-    display.print("humidity:");
-    display.print(event.relative_humidity);
-    display.println("%");
+    lcd.setCursor(3,1);
+    lcd.print("humidity:");
+    lcd.setCursor(13,1);
+    lcd.print(event.relative_humidity);
   }
-  
-  display.display();
 }
