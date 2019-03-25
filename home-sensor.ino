@@ -2,7 +2,7 @@
 #include <DHT.h>
 #include <DHT_U.h>
 
-#include "src/CO2Sensor/CO2Sensor.h"
+#include "src/CO2Sensor/src/CO2Sensor.h"
 CO2Sensor co2Sensor(A0, 0.99, 100);
 
 #include <Wire.h> 
