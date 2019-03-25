@@ -2,6 +2,9 @@
 #include <DHT.h>
 #include <DHT_U.h>
 
+#include "src/CO2Sensor/CO2Sensor.h"
+CO2Sensor co2Sensor(A0, 0.99, 100);
+
 #include <Wire.h> 
 #include <LiquidCrystal_I2C.h>
 LiquidCrystal_I2C lcd(0x27,20,4);
@@ -19,14 +22,11 @@ void setup() {
   lcd.print("Hello, world!");
 
   dht.begin();
+  co2Sensor.calibrate();
 }
 
 void loop() {
-  delay(5000);
-
   lcd.clear();
-
-  lcd.setCursor(0,0);
 
   sensors_event_t event;
 
@@ -53,4 +53,11 @@ void loop() {
     lcd.setCursor(13,1);
     lcd.print(event.relative_humidity);
   }
+
+  lcd.setCursor(8,2);
+  lcd.print("CO2:");
+  lcd.setCursor(13,2);
+  lcd.print(co2Sensor.read());
+
+  delay(1000*60);
 }
