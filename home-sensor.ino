@@ -1,4 +1,4 @@
-#include <Adafruit_Sensor.h>
+#include "src/Adafruit_Sensor/Adafruit_Sensor.h"
 #include <DHT.h>
 #include <DHT_U.h>
 

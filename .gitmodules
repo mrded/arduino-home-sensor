@@ -1,3 +1,6 @@
 [submodule "src/CO2Sensor"]
 	path = src/CO2Sensor
 	url = https://github.com/solvek/CO2Sensor.git
+[submodule "src/Adafruit_Sensor"]
+	path = src/Adafruit_Sensor
+	url = https://github.com/adafruit/Adafruit_Sensor.git
