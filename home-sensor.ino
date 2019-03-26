@@ -3,7 +3,6 @@
 #include "src/CO2Sensor/src/CO2Sensor.h"
 CO2Sensor co2Sensor(A0, 0.99, 100);
 
-#include <Wire.h> 
 #include <LiquidCrystal_I2C.h>
 LiquidCrystal_I2C lcd(0x27,20,4);
 
