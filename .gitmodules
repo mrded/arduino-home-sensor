@@ -1,3 +1,6 @@
 [submodule "src/CO2Sensor"]
 	path = src/CO2Sensor
 	url = https://github.com/solvek/CO2Sensor.git
+[submodule "src/LiquidCrystal_I2C"]
+	path = src/LiquidCrystal_I2C
+	url = https://github.com/johnrickman/LiquidCrystal_I2C.git

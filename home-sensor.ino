@@ -3,7 +3,7 @@
 #include "src/CO2Sensor/src/CO2Sensor.h"
 CO2Sensor co2Sensor(A0, 0.99, 100);
 
-#include <LiquidCrystal_I2C.h>
+#include "src/LiquidCrystal_I2C/LiquidCrystal_I2C.h"
 LiquidCrystal_I2C lcd(0x27,20,4);
 
 // DHT temperature sensor
@@ -15,7 +15,7 @@ DHT dht(DHTPIN, DHTTYPE);
 void setup() {
   lcd.init();
   lcd.backlight();
-  lcd.setCursor(0,0);
+  lcd.setCursor(4,1);
   
   lcd.print("Hello, world!");
 
@@ -27,12 +27,12 @@ void loop() {
   lcd.clear();
 
   lcd.setCursor(0,0);
-  lcd.print("temperature:");
+  lcd.print("Temperature:");
   lcd.setCursor(13,0);
   lcd.print((int) dht.readTemperature());
 
   lcd.setCursor(3,1);
-  lcd.print("humidity:");
+  lcd.print("Humidity:");
   lcd.setCursor(13,1);
   lcd.print(dht.readHumidity());
 
