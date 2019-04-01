@@ -4,3 +4,6 @@
 [submodule "src/LiquidCrystal_I2C"]
 	path = src/LiquidCrystal_I2C
 	url = https://github.com/johnrickman/LiquidCrystal_I2C.git
+[submodule "src/TinyDHT"]
+	path = src/TinyDHT
+	url = https://github.com/adafruit/TinyDHT.git

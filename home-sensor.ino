@@ -1,11 +1,10 @@
-#include <DHT.h>
-
 #include "src/CO2Sensor/src/CO2Sensor.h"
 CO2Sensor co2Sensor(A0, 0.99, 100);
 
 #include "src/LiquidCrystal_I2C/LiquidCrystal_I2C.h"
 LiquidCrystal_I2C lcd(0x27,20,4);
 
+#include "src/TinyDHT/TinyDHT.h"
 // DHT temperature sensor
 #define DHTPIN 7      // what pin we're connected to
 #define DHTTYPE DHT22  // sensor type: [DHT11, DHT22, DHT21, AM2301]
@@ -41,5 +40,5 @@ void loop() {
   lcd.setCursor(13,2);
   lcd.print(co2Sensor.read());
 
-  delay(1000*60);
+  delay(60000);
 }
