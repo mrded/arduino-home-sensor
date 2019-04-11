@@ -11,6 +11,8 @@ LiquidCrystal_I2C lcd(0x27,20,4);
 
 DHT dht(DHTPIN, DHTTYPE);
 
+int i;
+
 void setup() {
   lcd.init();
   lcd.backlight();
@@ -20,25 +22,40 @@ void setup() {
 
   dht.begin();
   co2Sensor.calibrate();
+  i = 0;
 }
 
 void loop() {
+  int co2 = co2Sensor.read();
+  int temperature = dht.readTemperature();
+  int humidity = dht.readHumidity();
+  
   lcd.clear();
 
   lcd.setCursor(0,0);
   lcd.print("Temperature:");
   lcd.setCursor(13,0);
-  lcd.print((int) dht.readTemperature());
+  lcd.print(temperature);
 
   lcd.setCursor(3,1);
   lcd.print("Humidity:");
   lcd.setCursor(13,1);
-  lcd.print(dht.readHumidity());
+  lcd.print(humidity);
 
+  int val = co2Sensor.read();
+ 
   lcd.setCursor(8,2);
   lcd.print("CO2:");
   lcd.setCursor(13,2);
-  lcd.print(co2Sensor.read());
+  lcd.print(co2);
+
+  // Progress
+  for (int x=0; x<i; x++) {
+    lcd.setCursor(x,3);
+    lcd.print('#'); 
+  }
+  
+  i = (i>=20) ? 0: i+1;
 
   delay(60000);
 }
