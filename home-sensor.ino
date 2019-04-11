@@ -16,9 +16,15 @@ int i;
 void setup() {
   lcd.init();
   lcd.backlight();
-  lcd.setCursor(4,1);
-  
-  lcd.print("Hello, world!");
+
+  lcd.setCursor(0,0);
+  lcd.print("Temperature:");
+
+  lcd.setCursor(3,1);
+  lcd.print("Humidity:");
+
+  lcd.setCursor(8,2);
+  lcd.print("CO2:");
 
   dht.begin();
   co2Sensor.calibrate();
@@ -29,23 +35,13 @@ void loop() {
   int co2 = co2Sensor.read();
   int temperature = dht.readTemperature();
   int humidity = dht.readHumidity();
-  
-  lcd.clear();
 
-  lcd.setCursor(0,0);
-  lcd.print("Temperature:");
   lcd.setCursor(13,0);
   lcd.print(temperature);
 
-  lcd.setCursor(3,1);
-  lcd.print("Humidity:");
   lcd.setCursor(13,1);
   lcd.print(humidity);
 
-  int val = co2Sensor.read();
- 
-  lcd.setCursor(8,2);
-  lcd.print("CO2:");
   lcd.setCursor(13,2);
   lcd.print(co2);
 
