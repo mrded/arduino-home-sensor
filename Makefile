@@ -13,3 +13,6 @@ build:
 
 install: 
 	arduino-cli upload -p $(PORT) --fqbn $(FQBN) 
+
+clean: 
+	rm *.elf *.hex  
