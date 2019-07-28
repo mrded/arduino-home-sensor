@@ -16,7 +16,7 @@
 ## Build
 
 - Install [arduino-cli](https://github.com/arduino/arduino-cli)
-- Updatethe platform indexes: `core update-index`
+- Updatethe platform indexes: `arduino-cli core update-index`
 - Install the right core. I'm using `Arduino/Genuino Uno` board: `arduino-cli core install arduino:avr`
 - Compile: `arduino-cli compile --fqbn arduino:avr:uno`
 - Get a port of your board: `arduino-cli board list` -> `/dev/cu.usbmodem14201`
