@@ -11,7 +11,7 @@ LiquidCrystal_I2C lcd(0x27,20,4);
 
 DHT dht(DHTPIN, DHTTYPE);
 
-int i;
+int uptime;
 
 void setup() {
   lcd.init();
@@ -26,9 +26,13 @@ void setup() {
   lcd.setCursor(8,2);
   lcd.print("CO2:");
 
+  lcd.setCursor(5,3);
+  lcd.print("Uptime:");
+
   dht.begin();
   co2Sensor.calibrate();
-  i = 0;
+
+  uptime = 0;
 }
 
 void loop() {
@@ -45,13 +49,8 @@ void loop() {
   lcd.setCursor(13,2);
   lcd.print(co2);
 
-  // Progress
-  for (int x=0; x<i; x++) {
-    lcd.setCursor(x,3);
-    lcd.print('#'); 
-  }
+  lcd.setCursor(13,3);
+  lcd.print(uptime++);
   
-  i = (i>=20) ? 0: i+1;
-
   delay(60000);
 }
