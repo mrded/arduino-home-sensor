@@ -18,6 +18,12 @@ void setup() {
   lcd.backlight();
 
   co2Sensor.calibrate();
+  lcd.setCursor(0,0);
+  lcd.print("CO2 sensor: OK!");
+
+  dht.begin();
+  lcd.setCursor(0,1);
+  lcd.print("DHT sensor: OK!");
 }
 
 void loop() {
