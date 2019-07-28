@@ -1,4 +1,5 @@
-PORT = /dev/cu.usbmodem14201 
+# @see: arduino-cli board list
+PORT = /dev/cu.usbmodem14101 
 FQBN = arduino:avr:uno
 CORE = arduino:avr
 
