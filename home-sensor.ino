@@ -36,21 +36,21 @@ void setup() {
 }
 
 void loop() {
-  int co2 = co2Sensor.read();
-  int temperature = dht.readTemperature();
-  int humidity = dht.readHumidity();
+  String co2 = String(co2Sensor.read());
+  String temperature = String(dht.readTemperature());
+  String humidity = String(dht.readHumidity());
 
   lcd.setCursor(13,0);
-  lcd.print(temperature);
+  lcd.print(temperature + " C");
 
   lcd.setCursor(13,1);
-  lcd.print(humidity);
+  lcd.print(humidity + " %");
 
   lcd.setCursor(13,2);
-  lcd.print(co2);
+  lcd.print(co2 + " ppm");
 
   lcd.setCursor(13,3);
-  lcd.print(uptime++);
+  lcd.print(String(uptime++) + " min");
   
   delay(60000);
 }
