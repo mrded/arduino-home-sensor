@@ -1,8 +1,8 @@
-# home-sensor
+# arduino-home-sensor
 
 ## Get the code 
 
-`git clone --recursive https://github.com/mrded/home-sensor.git`
+`git clone --recursive https://github.com/mrded/arduino-home-sensor.git`
 
 ## Load submodules 
 
